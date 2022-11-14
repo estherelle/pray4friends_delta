@@ -1,23 +1,9 @@
 import os
 
+from datetime import datetime
 from typing import List
 
-PEOPLE = [
-    ['Petros Yeung', 'M'],
-    ['Sophia Wang', 'F'],
-    ['Johnny Wu', 'M'],
-    ['Sylvia Yang', 'F'],
-    ['Jenny Huang', 'F'],
-    ['Esther Liao', 'F'],
-    ['Ann Shan', 'F'],
-    ['Kevin Yang', 'M'],
-    ['Jennifer Huang', 'F'],
-    ['Amy Lee', 'F'],
-    ['Kathleen Hu', 'F'],
-    ['Nathan Ruiz', 'M']
-]
-
-PRAYER_LOCATION='https://docs.google.com/document/d/1m0obS7Me-RhNqVale8zCBVQEiEvjr3nfPxZWpa_IUuY/edit#heading=h.479mxvgve6ve'
+PRAYER_LOCATION='https://bible.com'
 
 PRAYERER='<PRAYERER>'
 PRAYEE='<PRAYEE>'
@@ -32,6 +18,7 @@ You can find their prayer here:
 
 Thank you for praying for your brothers and sisters! 🙂
 '''
+PRAYER_OUTPUT_FILE_NAME='prayers_output.md'
 
 def getNewPrayerOrder(peopleThatArePraying, currentPrayerOrder: List[str], oldOrders: List[str]) -> bool:
     def checkIsUniqueOrder(newOrder) -> bool:
@@ -82,12 +69,45 @@ def loadGender(genderIdentifier, prayingPeople):
 
     raise Exception('No valid ordering found.')
 
-def printPrayerMessage(people):
+def getPrayerMessage(people):
+    all_prayers_message_pieces = []
     for i in range(len(people)):
         prayerer = people[i]
         prayee = people[(i + 1) % len(people)]
-        print(f'### Send this message to {prayerer}:')
-        print(PRAYER_MESSAGE.replace(PRAYERER, prayerer.split(" ")[0]).replace(PRAYEE, prayee))
+        all_prayers_message_pieces.append(f'### Send this message to {prayerer}:')
+        all_prayers_message_pieces.append(
+          PRAYER_MESSAGE
+            .replace(PRAYERER, prayerer.split(" ")[0])
+            .replace(PRAYEE, prayee))
+    return '\n'.join(all_prayers_message_pieces)
 
+prayerInputPeople = []
+
+with open('prayers_input.txt') as peoplePrayingFile:
+  person = peoplePrayingFile.readline()
+  while person and person != '':
+    prayerInputPeople.append(person.strip().split(','))
+    person = peoplePrayingFile.readline()
+
+genderMessages = []
+todaysDate = datetime.now().strftime("%m-%d-%Y")
+
+finishedGenderOrders = [f'# {todaysDate}\n']
 for gender in ['M', 'F']:
-    printPrayerMessage(loadGender(gender, PEOPLE))
+    finishedGenderOrder = loadGender(gender, prayerInputPeople)
+    finishedGenderOrders.append(f'## {gender}\n')
+    for person in finishedGenderOrder:
+      finishedGenderOrders.append(f'{person}\n')
+    genderMessage = getPrayerMessage(finishedGenderOrder)
+    genderMessages.append(genderMessage)
+
+completeMessage = '\n'.join(genderMessages)
+
+with open(PRAYER_OUTPUT_FILE_NAME, 'w+') as prayerOutputFile:
+  prayerOutputFile.write(completeMessage)
+
+with open(f'prayer-history/{todaysDate}.md', 'w+') as prayerOutputFile:
+  for line in finishedGenderOrders:
+    prayerOutputFile.writelines(line)
+
+print(f'Script complete. Wrote output to "{PRAYER_OUTPUT_FILE_NAME}"')
