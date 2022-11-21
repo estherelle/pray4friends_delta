@@ -4,7 +4,7 @@ Use this script to generate messages you can send to members of a small group so
 
 ## Instructions
 
-1. Add the names of your people and their gender to `prayers_inputs.txt`.
+1. Add the names of your people and their gender to `prayers_input.md`.
 1. Add instructions on how they can find the other person's prayer in `pray4friend.py` by setting the `PRAYER_LOCATION` variable.
 1. Run the script using `python pray4friends.py`.
 
@@ -17,19 +17,21 @@ Use this script to generate messages you can send to members of a small group so
 
 After you provide an input like this:
 
-```
-John Doe,M
-Brad Pitt,M
-Jason Smith,M
-George Washington,M
-Ann Green,F
-Holly Hills,F
-Miranda Ellis,F
-Tiffany Lee,F
-Christian Smith,F
-Annabelle Hero,F
-Mille Mary,F
-Natalie Young,F
+```markdown
+## M
+John Doe
+Brad Pitt
+Jason Smith
+George Washington
+## F
+Ann Green
+Holly Hills
+Miranda Ellis
+Tiffany Lee
+Christian Smith
+Annabelle Hero
+Mille Mary
+Natalie Young
 ```
 
 You'll get an output for all the members of your small group like this in `prayers_output.md`:
