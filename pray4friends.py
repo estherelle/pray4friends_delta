@@ -131,7 +131,7 @@ def main():
                 prayerInputLine = peoplePrayingFile.readline()
 
     genderMessages = []
-    todaysDate = args.date.strftime("%m-%d-%Y")
+    todaysDate = args.date.strftime("%Y-%m-%d")
 
     finishedGenderOrders = [f'# {todaysDate}\n']
     for gender in [MALE_IDENTIFIER, FEMALE_IDENTIFIER]:
