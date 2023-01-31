@@ -1,13 +1,15 @@
+#!/usr/bin/env python3
+
 import os
 
 from argparse import ArgumentParser
 from datetime import datetime
 from typing import List
+# NOTE: If import fails, remember to run `./generate_files.py`.
+from constants import PRAYER_LOCATION
 
 MALE_IDENTIFIER='M'
 FEMALE_IDENTIFIER='F'
-
-PRAYER_LOCATION='https://bible.com'
 
 PRAYERER_PLACEHOLDER='<PRAYERER>'
 PRAYEE_PLACEHOLDER='<PRAYEE>'
