@@ -7,7 +7,7 @@ Use this script to generate messages you can send to members of a small group so
 1. Run the generation script `./generate_files.py`. Get the `prayers_input.md` and `constants.py` files.
     1. Add the names of your people and their gender to `prayers_input.md`.
     1. Add instructions on how they can find the other person's prayer in by setting the `PRAYER_LOCATION` variable in `constants.py`.
-1. Run the script using `./pray4friends.py`.
+1. Run the script using `./generate_prayers.py`.
 
 ## Features
 
