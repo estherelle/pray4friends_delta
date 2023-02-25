@@ -48,12 +48,22 @@ Thank you for praying for your brothers and sisters! 🙂
 
     def readInPeoplePraying(prayer_input_file: str) -> List[str]:
         prayerInputPeople = []
+        seenPrayerInputPeople = set()
 
         with open(prayer_input_file) as peoplePrayingFile:
             prayerInputLine = peoplePrayingFile.readline()
             gender_info = None
             while prayerInputLine and prayerInputLine != "":
                 try:
+                    prayerPerson = prayerInputLine.strip()
+
+                    if prayerPerson == "":
+                        continue
+
+                    if prayerPerson in seenPrayerInputPeople:
+                        print(f"ERROR: Already saw {prayerPerson}, skipping them.")
+
+
                     if prayerInputLine.startswith(
                         f"## {PrayerMessages.MALE_IDENTIFIER}"
                     ):
@@ -71,7 +81,8 @@ Thank you for praying for your brothers and sisters! 🙂
                             f'Invalid entry in "{prayer_input_file}": {prayerInputLine}'
                         )
 
-                    prayerInputPeople.append([prayerInputLine.strip(), gender_info])
+                    prayerInputPeople.append([prayerPerson, gender_info])
+                    seenPrayerInputPeople.add(prayerPerson)
                 finally:
                     prayerInputLine = peoplePrayingFile.readline()
 
