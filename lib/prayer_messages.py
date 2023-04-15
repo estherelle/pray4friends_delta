@@ -39,7 +39,7 @@ Hey, {PRAYERER_PLACEHOLDER}! Hope you've been having a great week 🙂 Could you
 
 Please tell them you are praying for them!
 
-You can find their prayer here:
+You can find their prayer requests here:
 {PRAYER_LOCATION}
 
 Thank you for praying for your brothers and sisters! 🙂
