@@ -122,10 +122,20 @@ Thank you for praying for your brothers and sisters! 🙂
             oldOrder = []
 
             with open(os.sep.join([path, file])) as oldPrayerFile:
-                while not oldPrayerFile.readline().startswith(
-                    f"## {genderIdentifier}\n"
-                ):
-                    pass
+                foundGenderGroup = False
+                while True:
+                    line = oldPrayerFile.readline()
+
+                    if line == "":
+                        break
+
+                    if line.startswith(f"## {genderIdentifier}\n"):
+                        foundGenderGroup = True
+                        break
+
+                if not foundGenderGroup:
+                    break
+
                 while True:
                     prayerName = oldPrayerFile.readline()
 
