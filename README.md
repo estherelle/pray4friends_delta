@@ -6,7 +6,8 @@ Use this script to generate messages you can send to members of a small group so
 
 1. Run the generation script `./starter_files.py`. Get the `prayers_input.md` and `constants.py` starter files.
     1. Add the names of your people and their gender to `prayers_input.md`.
-    1. Add instructions on how they can find the other person's prayer in by setting the `PRAYER_LOCATION` variable in `constants.py`.
+    1. Add instructions on how they can find the other person's prayer:
+        1. Set the `PRAYER_LOCATION` variable in `constants.py`. This will be a link to a Google Doc with the prayers.
 1. Run the script using `./lib/generate_prayers.py`.
 
 ## Features
@@ -49,6 +50,16 @@ https://bible.com
 
 Thank you for praying for your brothers and sisters! 🙂
 ```
+
+You will also get a file automatically generated in `prayer-history/202X-XX-XX.md`. Commit that file and make a pull request on the repo.
+
+```bash
+$ git add .
+$ git commit -m "202X-XX-XX prayer history"
+$ git push
+```
+
+Go to the [Delta GitHub Repo](https://github.com/estherelle/pray4friends_delta) and create a pull request.
 
 ## Appendix
 
